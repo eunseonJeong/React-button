@@ -1,65 +1,82 @@
-import React from 'react';
+import React, { useState } from 'react'
+import Button from './components/Button'
+import Input from './components/Input';
 import styled, { ThemeProvider } from 'styled-components';
-import Button from './components/Button';
-
-const AppBlock = styled.div`
-  width: 512px;
-  margin: 0 auto;
-  margin-top: 4rem;
-  border: 1px solid black;
-  padding: 1rem;
-`;
 
 const ButtonGroup = styled.div`
-  & + & {
     margin-top: 1rem;
-  }
+
+    .
 `;
 
 function App() {
-  const alram = () =>{
-    alert('안녕하세요')
+
+  const alarmAlert = () => {
+    alert('버튼을 만들어봐!')
   }
+
+  const [name,setName] = useState('');
+  const [price,setPrice] = useState(0);
+
+  const nameBtnHandelr = e => {
+    setName(e.target.value);
+  }
+
+  const priceBtnHandelr = e => {
+    setPrice(e.target.value);
+  }
+
+  const clickBtnHandelr = () =>{
+    return alert(` ${name} 안녕하세요. ${price} 원 입니다.`);
+  }
+
   return (
     <ThemeProvider
       theme={{
         palette: {
-          blue: '#228be6',
-          gray: '#495057',
-          pink: '#f06595'
+          green: '#32ff7e',
+          pink: '#ffcccc',
+          purple: '#cd84f1',
         }
-      }}
-    >
-      <AppBlock>
-        <ButtonGroup>
-          <Button>BUTTON</Button>
-          <Button onClick={alram} size="large">BUTTON</Button>
-          <Button size="small">BUTTON</Button>
-          <Button color="blue" outline>
-            BUTTON
-          </Button>        
-        </ButtonGroup>
+      }}>
 
-        <ButtonGroup>
-          <Button color="gray">BUTTON</Button>
-          <Button color="gray" size="large">BUTTON</Button>
-          <Button color="gray" size="small">BUTTON</Button>
-          <Button color="gray" outline>
-            BUTTON
-          </Button>  
-        </ButtonGroup>
-        <ButtonGroup>
-          <Button color="pink" >BUTTON</Button>
-          <Button color="pink" size="large" >BUTTON</Button>
-          <Button color="pink" size="small" >BUTTON</Button>
-          <Button color="pink" outline>
-            BUTTON
-          </Button>  
-        </ButtonGroup>
+      <h3>Button</h3>
+      <ButtonGroup>
+        <Button onClick={alarmAlert} outline> 테두리1 </Button>
+        <Button size="medium"> medium </Button>
+        <Button size="small">small</Button>
 
-      </AppBlock>
-    </ThemeProvider>
-  );
+        <br />
+        <br />
+
+        <Button color="pink" outline> 테두리2 </Button>
+        <Button size="medium" color="pink"> medium </Button>
+        <Button size="small" color="pink"> small </Button>
+      </ButtonGroup>
+
+      <h3>Input</h3>
+      <ButtonGroup>
+        이름
+        <input type="text" 
+        value={name} onChange={nameBtnHandelr}/>
+        가격
+        <input type="number" 
+        value={price} onChange={priceBtnHandelr}/>
+        <Button color="purple" onClick={clickBtnHandelr}>저장</Button>
+      </ButtonGroup>
+
+      <h3>Modal</h3>
+      <ButtonGroup>
+        <Button outline>open Modal</Button>
+        <Button>open Modal</Button>
+      </ButtonGroup>
+
+      <h3>Select</h3>
+      <li>자바스크립트</li>
+
+
+    </ThemeProvider >
+  )
 }
 
-export default App;
+export default App
